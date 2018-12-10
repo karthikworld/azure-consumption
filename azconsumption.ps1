@@ -1,4 +1,4 @@
-#Login-AzAccount
+Login-AzAccount
 $Subscription = Read-Host -Prompt 'Subscription Name :'
 $BillingPeriodName = Read-Host -Prompt 'Billing Period (Example: 20181101):'
 Set-AzContext -Subscription $Subscription

@@ -4,7 +4,6 @@ $BillingPeriodName = Read-Host -Prompt 'Billing Period (Example: 20181101):'
 Set-AzContext -Subscription $Subscription
 $ResourceGroupNames = Get-AzResourceGroup | select-object -Property ResourceGroupName
 foreach ($ResourceGroup in $ResourceGroupNames) {
-    #resourceusage= Get-AzConsumptionUsageDetail -Expand MeterDetails -BillingPeriodName 20181101 -ResourceGroup databricks-rg-dbricks-octopus-nersvuunzb2c6-dl4jrvkmc67ie | select-object InstanceName, PretaxCost, Product 
     $resourceusage = (Get-AzConsumptionUsageDetail -Expand MeterDetails -BillingPeriodName $BillingPeriodName -ResourceGroup $ResourceGroup.ResourceGroupName  | select-object InstanceName, PretaxCost,Product,UsageStart | Sort-Object -Property InstanceName, Product) 
     $usagedata = $resourceusage | group-object {$_.InstanceName}
     $totalresourcegroupcost = 0 
